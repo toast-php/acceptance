@@ -61,8 +61,8 @@ mode if they're set.
 > So, in test mode, use a mock database etc.
 
 ## Writing an acceptance test
-To write these tests, we'll make use of the `Gentry\Browser` object. This is a
-wrapper around PHP PhantomJS with some convenience methods.
+To write these tests, we'll make use of the `Gentry\Acceptance\Browser` object.
+This is a wrapper around PHP PhantomJS with some convenience methods.
 
 ```php
 <?php
@@ -74,7 +74,7 @@ class Test
      */
     public function getAPage()
     {
-        $browser = new Gentry\Browser;
+        $browser = new Gentry\Acceptance\Browser;
         yield asset($browser->get('http://example.com/')->getStatus() == 200);
     }
 }
@@ -107,7 +107,7 @@ parameter. This is the session ID used:
 <?php
 
 // ...
-$browser = new Gentry\Browser('abcd');
+$browser = new Gentry\Acceptance\Browser('abcd');
 // ...
 ```
 
