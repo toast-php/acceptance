@@ -1,0 +1,13 @@
+{
+    "name": "gentry/acceptance",
+    "description": "Acceptance tests for the Gentry test framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marijn Ophorst",
+            "email": "marijn@monomelodies.nl"
+        }
+    ],
+    "require": {}
+}
