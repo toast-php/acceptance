@@ -1,0 +1,8 @@
+site_name: Gentry acceptance tests
+site_url: http://gentry.monomelodies.nl/acceptance/docs/
+repo_url: https://github.com/gentry-php/acceptance
+
+pages:
+- Home:
+    - 'Quickstart': 'index.md'
+
