@@ -9,5 +9,29 @@
             "email": "marijn@monomelodies.nl"
         }
     ],
-    "require": {}
+    "require": {
+        "ext-bz2": ">=7.0",
+        "gentry/gentry": "^0.9.0",
+        "jonnyw/php-phantomjs": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gentry\\Acceptance\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gentry\\Acceptance\\": "src",
+            "Gentry\\Acceptance\\Tests\\": "tests",
+            "Gentry\\Acceptance\\Demo\\": "demo"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
+    }
 }
