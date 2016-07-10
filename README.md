@@ -18,11 +18,9 @@ Install the acceptance module:
 composer require --dev gentry/acceptance
 ```
 
-
-First and foremost, we're going to need the PhantomJS headless browser. Luckily,
-we can install it via Composer!
-
-> Installing PhantomJS requires the PHP BZ2 module.
+This will also install the PhantomJS headless browser, which requires the PHP
+BZ2 module. It's listed as a dependency, so Composer will complain if you don't
+have it already.
 
 Add the following to (the root of) your application's `composer.json`:
 
