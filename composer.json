@@ -11,7 +11,7 @@
     ],
     "require": {
         "ext-bz2": ">=7.0",
-        "gentry/gentry": "^0.9.0",
+        "gentry/gentry": "^0.10.0",
         "jonnyw/php-phantomjs": "4.*"
     },
     "autoload": {
