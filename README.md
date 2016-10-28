@@ -43,7 +43,7 @@ symlink the executable there.
 > This is needed due to an apparent bug in the PhpPhantomJs package. It's
 > _supposed_ to get its location from Composer, only it seems to be hardcoded.
 
-Note that the PhantomInstaller requires PHP's BZ2 module (it's `composer.json`
+Note that the PhantomInstaller requires PHP's BZ2 module (its `composer.json`
 doesn't explicitly state that, without it the installation will fail with no
 meaningful error message).
 
@@ -147,6 +147,9 @@ An acceptance test with multiple users would be implemented something like this:
 $john = new Browser(session_id());
 $mary = new Browser(session_id());
 
+// Here you would first make sure both users are logged in; how that mechanism
+// works exactly is up to your application of course.
+
 // John sends his message
 $response = $john->post('/message/', ['to' => 'Mary', 'body' => 'Hi Mary!']);
 yield assert($response->getStatus() == 200);
@@ -155,7 +158,7 @@ $response = $mary->get('/message/');
 yield assert(strpos($response->getContent(), 'Unread: 1'));
 // Empty mock database, so this message got ID 1
 $response = $mary->get('/message/1/');
-yield assert(strpons($response->getContent(), 'From: John'));
+yield assert(strpos($response->getContent(), 'From: John'));
 // Mary read it, so now unread should be 0 again
 $response = $mary->get('/message/');
 yield assert(strpos($response->getContent(), 'Unread: 0'));
