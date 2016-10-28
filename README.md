@@ -100,6 +100,12 @@ on the `Browser` object. This is much more convenient for a number of reasons:
 4. Even better: assuming you have access to the session data, since you can know
    the ID in advance you can setup a logged in user!
 
+To use sessions you'll need the additional `gentry/cache` package:
+
+```sh
+$ composer require --dev gentry/cache
+```
+
 When you construct the `Browser` object you can pass an optional `$sessionid`
 parameter. This is the session ID used:
 
