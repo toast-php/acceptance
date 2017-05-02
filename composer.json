@@ -1,6 +1,6 @@
 {
-    "name": "gentry/acceptance",
-    "description": "Acceptance tests for the Gentry test framework",
+    "name": "toast/acceptance",
+    "description": "Acceptance tests for the Toast test framework",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,19 +11,12 @@
     ],
     "require": {
         "ext-bz2": ">=7.0",
-        "gentry/gentry": "^0.11.0",
+        "toast/unit": "^0.11.0",
         "jonnyw/php-phantomjs": "4.*"
     },
     "autoload": {
         "psr-4": {
-            "Gentry\\Acceptance\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Gentry\\Acceptance\\": "src",
-            "Gentry\\Acceptance\\Tests\\": "tests",
-            "Gentry\\Acceptance\\Demo\\": "demo"
+            "Toast\\Acceptance\\": "src"
         }
     },
     "scripts": {
