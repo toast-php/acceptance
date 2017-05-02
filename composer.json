@@ -1,5 +1,5 @@
 {
-    "name": "toast/acceptance",
+    "name": "toast-php/acceptance",
     "description": "Acceptance tests for the Toast test framework",
     "type": "library",
     "license": "MIT",
