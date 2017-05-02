@@ -15,7 +15,7 @@ PhantomJS to run your acceptance tests.
 Install the acceptance module:
 
 ```bash
-composer require --dev gentry/acceptance
+composer require --dev toast/acceptance
 ```
 
 This will also install the PhantomJS headless browser, which requires the PHP
@@ -100,10 +100,10 @@ on the `Browser` object. This is much more convenient for a number of reasons:
 4. Even better: assuming you have access to the session data, since you can know
    the ID in advance you can setup a logged in user!
 
-To use sessions you'll need the additional `gentry/cache` package:
+To use sessions you'll need the additional `toast/cache` package:
 
 ```sh
-$ composer require --dev gentry/cache
+$ composer require --dev toast/cache
 ```
 
 When you construct the `Browser` object you can pass an optional `$sessionid`
