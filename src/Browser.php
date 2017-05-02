@@ -1,8 +1,8 @@
 <?php
 
-namespace Gentry\Acceptance;
+namespace Toast\Acceptance;
 
-use Gentry\Cache;
+use Toast\Cache;
 use JonnyW\PhantomJs\Client;
 
 class Browser
@@ -26,7 +26,7 @@ class Browser
         $request->setMethod('GET');
         $request->setUrl($url);
         $client->send($request, $response);
-        if (class_exists('Gentry\Cache\Pool')) {
+        if (class_exists('Toast\Cache\Pool')) {
             Cache\Pool::getInstance()->__wakeup();
         }
         return $response;
@@ -39,7 +39,7 @@ class Browser
         $request->setUrl($url);
         $request->setRequestData($data);
         $client->send($request, $response);
-        if (class_exists('Gentry\Cache\Pool')) {
+        if (class_exists('Toast\Cache\Pool')) {
             Cache\Pool::getInstance()->__wakeup();
         }
         return $response;
@@ -48,16 +48,16 @@ class Browser
     private function initializeRequest()
     {
         $client = Client::getInstance();
-        $client->getEngine()->setPath(getenv("GENTRY_VENDOR").'/bin/phantomjs');
-        $cookies = sys_get_temp_dir().'/'.getenv("GENTRY_CLIENT");
+        $client->getEngine()->setPath(getenv("TOAST_VENDOR").'/bin/phantomjs');
+        $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $client->getEngine()->addOption("--cookies-file=$cookies");
         $request = $client->getMessageFactory()->createRequest();
         $response = $client->getMessageFactory()->createResponse();
         $client->getProcedureCompiler()->disableCache();
         $request->addHeader('Cookie', self::$sessionname.'='.$this->sessionid);
-        $request->addHeader('Gentry', getenv("GENTRY"));
-        $request->addHeader('Gentry-Client', getenv("GENTRY_CLIENT"));
-        $request->addHeader('User-Agent', 'Gentry/PhantomJs headless');
+        $request->addHeader('Toast', getenv("TOAST"));
+        $request->addHeader('Toast-Client', getenv("TOAST_CLIENT"));
+        $request->addHeader('User-Agent', 'Toast/PhantomJs headless');
         $request->setTimeout(5000);
         return [$client, $request, $response];
     }
