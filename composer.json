@@ -11,7 +11,7 @@
     ],
     "require": {
         "ext-bz2": ">=7.0",
-        "toast-php/unit": "^0.11.0",
+        "toast-php/unit": "^1.1.0",
         "jonnyw/php-phantomjs": "4.*"
     },
     "autoload": {
