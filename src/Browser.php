@@ -48,7 +48,7 @@ class Browser
     private function initializeRequest()
     {
         $client = Client::getInstance();
-        $client->getEngine()->setPath(getenv("TOAST_VENDOR").'/bin/phantomjs');
+        $client->getEngine()->setPath(getcwd().'/vendor/bin/phantomjs');
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $client->getEngine()->addOption("--cookies-file=$cookies");
         $request = $client->getMessageFactory()->createRequest();
