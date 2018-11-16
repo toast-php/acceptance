@@ -48,6 +48,9 @@ class Browser
     private function initializeRequest()
     {
         $client = Client::getInstance();
+        $client->getEngine()->addOption('--ssl-protocol=any');
+        $client->getEngine()->addOption('--ignore-ssl-errors=true');
+        $client->getEngine()->addOption('--web-security=false');
         $client->getEngine()->setPath(getcwd().'/vendor/bin/phantomjs');
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $client->getEngine()->addOption("--cookies-file=$cookies");
