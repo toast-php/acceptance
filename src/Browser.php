@@ -2,7 +2,6 @@
 
 namespace Toast\Acceptance;
 
-use Toast\Cache;
 use JonnyW\PhantomJs\Client;
 
 class Browser
@@ -26,9 +25,6 @@ class Browser
         $request->setMethod('GET');
         $request->setUrl($url);
         $client->send($request, $response);
-        if (class_exists('Toast\Cache\Pool')) {
-            Cache\Pool::getInstance()->__wakeup();
-        }
         return $response;
     }
 
@@ -39,9 +35,6 @@ class Browser
         $request->setUrl($url);
         $request->setRequestData($data);
         $client->send($request, $response);
-        if (class_exists('Toast\Cache\Pool')) {
-            Cache\Pool::getInstance()->__wakeup();
-        }
         return $response;
     }
 
