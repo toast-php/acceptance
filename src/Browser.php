@@ -43,13 +43,13 @@ class Browser
     private function initializeRequest()
     {
         $browserFactory = new BrowserFactory($this->command);
-        $browser = $browserFactory->createBrowser();
-        $browser->getEngine()->addOption('--ssl-protocol=any');
-        $browser->getEngine()->addOption('--ignore-ssl-errors=true');
-        $browser->getEngine()->addOption('--web-security=false');
-        $browser->getEngine()->setPath(getcwd().'/vendor/bin/phantomjs');
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
-        $browser->getEngine()->addOption("--cookies-file=$cookies");
+        $browser = $browserFactory->createBrowser([
+            'ignoreCertificateErrors' => true,
+            'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies"],
+        ]);
+        $page = $browser->createPage();
+        $page->navigate(
         $request = $browser->getMessageFactory()->createRequest();
         $response = $browser->getMessageFactory()->createResponse();
         $browser->getProcedureCompiler()->disableCache();
