@@ -18,5 +18,9 @@
         "psr-4": {
             "Toast\\Acceptance\\": "src"
         }
+    },
+    "require-dev": {
+        "gentry/gentry": "^0.13.5",
+        "gentry/toast": "^0.1.0"
     }
 }
