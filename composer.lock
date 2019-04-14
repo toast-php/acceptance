@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c8131aecdcf08a85bdc59d7db8eae61",
+    "content-hash": "f548f9b5c55f9efda50385486fe53280",
     "packages": [
         {
             "name": "apix/log",
@@ -612,7 +612,290 @@
             "time": "2017-02-12T02:08:51+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "gentry/gentry",
+            "version": "0.13.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gentry-php/gentry.git",
+                "reference": "1e6a909f63cdf653e640540b116c92885c3329cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gentry-php/gentry/zipball/1e6a909f63cdf653e640540b116c92885c3329cf",
+                "reference": "1e6a909f63cdf653e640540b116c92885c3329cf",
+                "shasum": ""
+            },
+            "require": {
+                "monomelodies/kingconf": "^1.1.0",
+                "monomelodies/reflex": "^0.2.0",
+                "php": ">=7.2",
+                "simoneast/simple-ansi-colors": "^1.0",
+                "twig/twig": ">=1.0",
+                "zeptech/annotations": "^1.0.0"
+            },
+            "require-dev": {
+                "toast/unit": "^1.3"
+            },
+            "bin": [
+                "bin/gentry"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gentry\\Gentry\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marijn Ophorst",
+                    "email": "marijn@monomelodies.nl"
+                }
+            ],
+            "description": "PHP unit test generation tools",
+            "time": "2019-04-12T14:06:12+00:00"
+        },
+        {
+            "name": "gentry/toast",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gentry-php/toast.git",
+                "reference": "c5b9ea4e7a3a683006ba182fe137f2455b5f264e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gentry-php/toast/zipball/c5b9ea4e7a3a683006ba182fe137f2455b5f264e",
+                "reference": "c5b9ea4e7a3a683006ba182fe137f2455b5f264e",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marijn Ophorst",
+                    "email": "marijn@monomelodies.nl"
+                }
+            ],
+            "description": "Toast templates for Gentry",
+            "time": "2017-09-19T11:32:17+00:00"
+        },
+        {
+            "name": "monomelodies/reflex",
+            "version": "0.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monomelodies/reflex.git",
+                "reference": "5f9cbb6737381bbb33bf1f4c6f6bf6951037e692"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monomelodies/reflex/zipball/5f9cbb6737381bbb33bf1f4c6f6bf6951037e692",
+                "reference": "5f9cbb6737381bbb33bf1f4c6f6bf6951037e692",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7",
+                "zeptech/annotations": "^1.1"
+            },
+            "require-dev": {
+                "toast/unit": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monomelodies\\Reflex\\": "./src",
+                    "Tests\\": "./classes-for-testing"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marijn Ophorst",
+                    "email": "marijn@monomelodies.nl"
+                }
+            ],
+            "description": "Reflection utilities for PHP7+",
+            "time": "2017-09-27T06:54:28+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
+                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v2.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "ed9c49220e09bfaeb1ba4d48077c08a7b09908dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ed9c49220e09bfaeb1ba4d48077c08a7b09908dd",
+                "reference": "ed9c49220e09bfaeb1ba4d48077c08a7b09908dd",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/polyfill-ctype": "^1.8",
+                "symfony/polyfill-mbstring": "^1.3"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "https://twig.symfony.com/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2019-03-23T14:28:58+00:00"
+        },
+        {
+            "name": "zeptech/annotations",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pgraham/php-annotations.git",
+                "reference": "9cd042daa9ace184d04b49f0605edf73f19a9c71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pgraham/php-annotations/zipball/9cd042daa9ace184d04b49f0605edf73f19a9c71",
+                "reference": "9cd042daa9ace184d04b49f0605edf73f19a9c71",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "zpt\\anno": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Philip Graham",
+                    "email": "philip@zeptech.ca"
+                }
+            ],
+            "description": "DOC Block annotation parsing for PHP",
+            "homepage": "https://github.com/pgraham/php-annotations",
+            "keywords": [
+                "annotations"
+            ],
+            "time": "2013-05-29T02:35:23+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
