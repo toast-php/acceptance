@@ -2,7 +2,7 @@
 
 namespace Toast\Acceptance;
 
-use HeadlessChromium\BrowserFactory;
+use HeadlessChromium\{ BrowserFactory, Page };
 
 class Browser
 {
@@ -21,26 +21,35 @@ class Browser
         }
     }
 
-    public function get($url)
+    public function get(string $url) : Page
     {
-        list($browser, $request, $response) = $this->initializeRequest();
-        $request->setMethod('GET');
-        $request->setUrl($url);
-        $browser->send($request, $response);
-        return $response;
+        return $this->initializeRequest($url);
     }
 
-    public function post($url, array $data)
+    public function post($url, string $form, array $data, string $submit = 'button[type=submit]') : Page
     {
-        list($browser, $request, $response) = $this->initializeRequest();
-        $request->setMethod('POST');
-        $request->setUrl($url);
-        $request->setRequestData($data);
-        $browser->send($request, $response);
-        return $response;
+        $page = $this->initializeRequest($url);
+        $populate = [];
+        array_walk($data, function ($value, $key) use (&$populate) {
+            $value = addslashes($value);
+            $populate[] = "form.querySelector([name=$key]).value = '$value';";
+        });
+        $populate = implode("\n", $populate);
+        var_dump($populate);
+        $evaluation = $page->evaluate(
+            <<<EOT
+(() => {
+    const form = document.querySelector($form);
+    $populate
+    form.querySelector('$submit').click();
+})();
+EOT
+        );
+        $evaluation->waitForPageReload();
+        return $page;
     }
 
-    private function initializeRequest()
+    private function initializeRequest(string $url) : Page
     {
         $browserFactory = new BrowserFactory($this->command);
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
@@ -49,7 +58,8 @@ class Browser
             'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies"],
         ]);
         $page = $browser->createPage();
-        $page->navigate(
+        $page->navigate($url)->waitForNavigation();
+        return $page;
         $request = $browser->getMessageFactory()->createRequest();
         $response = $browser->getMessageFactory()->createResponse();
         $browser->getProcedureCompiler()->disableCache();
