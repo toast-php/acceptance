@@ -32,14 +32,13 @@ class Browser
         $populate = [];
         array_walk($data, function ($value, $key) use (&$populate) {
             $value = addslashes($value);
-            $populate[] = "form.querySelector([name=$key]).value = '$value';";
+            $populate[] = "form.querySelector('[name=$key]').value = '$value';";
         });
         $populate = implode("\n", $populate);
-        var_dump($populate);
         $evaluation = $page->evaluate(
             <<<EOT
 (() => {
-    const form = document.querySelector($form);
+    const form = document.querySelector('$form');
     $populate
     form.querySelector('$submit').click();
 })();
