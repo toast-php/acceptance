@@ -14,7 +14,7 @@ return function () : Generator {
 
     /** post yields true */
     yield function () use ($object) {
-        $result = $object->post('file://'.__DIR__.'/files/post.html', 'form', ['foo' => 'bar']);
+        $result = $object->post('http://localhost:8000', 'form', ['foo' => 'bar']);
         assert(true);
     };
 
