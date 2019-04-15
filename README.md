@@ -18,40 +18,12 @@ Install the acceptance module:
 composer require --dev toast/acceptance
 ```
 
-This will also install the PhantomJS headless browser, which requires the PHP
-BZ2 module. It's listed as a dependency, so Composer will complain if you don't
-have it already.
-
-Add the following to (the root of) your application's `composer.json`:
-
-```json
-"scripts": {
-    "post-install-cmd": [
-        "PhantomInstaller\\Installer::installPhantomJS"
-    ],
-    "post-update-cmd": [
-        "PhantomInstaller\\Installer::installPhantomJS"
-    ]
-}
-```
-
-You could also call this manually, but this is handy. Run `composer update`. The
-`phantomjs` binary is now installed into your `vendor/bin` directory. Create a
-`bin` directory in your application's root if you don't have one yet, and
-symlink the executable there.
-
-> This is needed due to an apparent bug in the PhpPhantomJs package. It's
-> _supposed_ to get its location from Composer, only it seems to be hardcoded.
-
-Note that the PhantomInstaller requires PHP's BZ2 module (its `composer.json`
-doesn't explicitly state that, without it the installation will fail with no
-meaningful error message).
+Acceptance testing requires Chrome or Chromium Headless to be installed.
 
 ## Preparing your project
 Your project needs to be made Toast-aware. For regular tests we did that via
 the `getenv('TOAST')` check; for HTTP calls it is similar. Toast's browser
-passes these variables in headers, and they are thus available as
-`$_SERVER['HTTP_TOAST_something']` entries in the server superglobal.
+passes this variable as `$_GET['TOAST']`.
 
 In a central place - this can be any place depending on your project, as long as
 you're 100% sure every called page will run that bit of code - place a check for
@@ -60,27 +32,31 @@ mode if they're set.
 
 > So, in test mode, use a mock database etc.
 
+Note: you probably also want to only check this on a development URL -
+production should of course ignore the `$_GET['TOAST']` variable.
+
+The `TOAST_CLIENT` environment variable is also passed in this manner.
+
 ## Writing an acceptance test
 To write these tests, we'll make use of the `Toast\Acceptance\Browser` object.
-This is a wrapper around PHP PhantomJS with some convenience methods.
+This is a wrapper around Headless Chromium PHP with some convenience methods.
 
 ```php
 <?php
 
-class Test
-{
-    /**
-     * Going to grab an external page
-     */
-    public function getAPage()
-    {
+/** Example browser test */
+return function () : Generator {
+    /** We can grab an external page */
+    yield function () {
         $browser = new Toast\Acceptance\Browser;
+        $page = $browser->get('http://example.com');
+        $ev
         yield asset($browser->get('http://example.com/')->getStatus() == 200);
-    }
-}
+    };
+};
 ```
 
-The `get` and `post` methods on the Browser return a "response" object. This
+The `get` and `post` methods on the Browser return a `Page` object. This
 tells us stuff about the page we just retrieved, like the HTTP status code we
 were checking in this example. You can also get the full page contents, inspect
 all headers etc. See the PHP PhantomJS API documentation for all options.
