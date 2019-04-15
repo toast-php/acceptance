@@ -50,7 +50,7 @@ EOT
 
     private function initializeRequest(string $url) : Page
     {
-        $url .= (strpos($url, '?') !== false ? '&' : '?')."TOAST=".getenv("TOAST")."&TOAST_CLIENT=".$this->sessionid;
+        $url .= (strpos($url, '?') !== false ? '&' : '?')."TOAST=".getenv("TOAST")."&TOAST_CLIENT=".($this->sessionid ?? getenv("TOAST_CLIENT"));
         $browserFactory = new BrowserFactory($this->command);
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $browser = $browserFactory->createBrowser([
