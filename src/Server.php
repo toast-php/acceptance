@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <body>
-        <form>
+        <form method="post" action="">
             <input type="text" name="foo">
             <button type="submit"></button>
         </form>
