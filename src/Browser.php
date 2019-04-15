@@ -2,7 +2,7 @@
 
 namespace Toast\Acceptance;
 
-use HeadlessChromium\{ BrowserFactory, Page };
+use HeadlessChromium\{ BrowserFactory, Page, Cookies\Cookie };
 
 class Browser
 {
@@ -50,26 +50,24 @@ EOT
 
     private function initializeRequest(string $url) : Page
     {
-        $url .= (strpos($url, '?') !== false ? '&' : '?')."TOAST=".getenv("TOAST")."&TOAST_CLIENT=".($this->sessionid ?? getenv("TOAST_CLIENT"));
         $browserFactory = new BrowserFactory($this->command);
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $browser = $browserFactory->createBrowser([
             'ignoreCertificateErrors' => true,
             'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies"],
+            'headless' => false,
         ]);
         $page = $browser->createPage();
+        $domain = preg_replace('@^https?://(.*?)/.*?$@', '$1', $url);
+        $expires = time() + 3600;
+        $page->setCookies([
+            Cookie::create('TOAST', "1", compact('domain', 'expires')),
+            Cookie::create('TOAST_CLIENT', ''.getenv('TOAST_CLIENT'), compact('domain', 'expires')),
+            Cookie::create(self::$sessionname, $this->sessionid, compact('domain', 'expires')),
+        ])->await();
         $page->navigate($url)->waitForNavigation();
         $page->setUserAgent('Toast/Chrome headless');
         return $page;
-        $request = $browser->getMessageFactory()->createRequest();
-        $response = $browser->getMessageFactory()->createResponse();
-        $browser->getProcedureCompiler()->disableCache();
-        $request->addHeader('Cookie', self::$sessionname.'='.$this->sessionid);
-        $request->addHeader('Toast', getenv("TOAST"));
-        $request->addHeader('Toast-Client', getenv("TOAST_CLIENT"));
-        $request->addHeader('User-Agent', 'Toast/PhantomJs headless');
-        $request->setTimeout(5000);
-        return [$browser, $request, $response];
     }
 }
 
