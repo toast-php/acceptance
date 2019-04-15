@@ -50,6 +50,7 @@ EOT
 
     private function initializeRequest(string $url) : Page
     {
+        $url .= (strpos($url, '?') !== false ? '&' : '?')."TOAST=".getenv("TOAST")."&TOAST_CLIENT=".getenv("TOAST_CLIENT");
         $browserFactory = new BrowserFactory($this->command);
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $browser = $browserFactory->createBrowser([
@@ -58,6 +59,7 @@ EOT
         ]);
         $page = $browser->createPage();
         $page->navigate($url)->waitForNavigation();
+        $page->setUserAgent('Toast/Chrome headless');
         return $page;
         $request = $browser->getMessageFactory()->createRequest();
         $response = $browser->getMessageFactory()->createResponse();
