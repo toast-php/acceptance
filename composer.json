@@ -11,7 +11,7 @@
     ],
     "require": {
         "ext-bz2": ">=7.0",
-        "toast/unit": "^1.1.0",
+        "toast/unit": "^2.0.0",
         "chrome-php/chrome": "^0.6.0"
     },
     "autoload": {
