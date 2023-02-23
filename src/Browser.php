@@ -4,15 +4,25 @@ namespace Toast\Acceptance;
 
 use HeadlessChromium\{ BrowserFactory, Page, Cookies\Cookie };
 
+/**
+ * The Toast browser wrapper.
+ */
 class Browser
 {
-    /** @var string */
-    public static $sessionname = 'PHPSESSID';
-    /** @var string */
-    private $sessionid;
-    /** @var string */
-    private $command;
+    /** Change this if needed for your project. */
+    public static string $sessionname = 'PHPSESSID';
 
+    private string $sessionid;
+
+    private string $command;
+
+    /**
+     * @param string $command The command to use when launching Chrome. Defaults
+     *  to `chrome`.
+     * @param string $sessionid Optional fake session ID to use. Supply this
+     *  whenever testing something that relies on a session (e.g. a login).
+     * @return void
+     */
     public function __construct(string $command = 'chrome', string $sessionid = null)
     {
         $this->command = $command;
@@ -21,12 +31,33 @@ class Browser
         }
     }
 
+    /**
+     * Perform a GET on the supplied URL.
+     *
+     * @param string $url
+     * @return HeadlessChromium\Page
+     */
     public function get(string $url) : Page
     {
         return $this->initializeRequest($url);
     }
 
-    public function post($url, string $form, array $data, string $submit = 'button[type=submit]') : Page
+    /**
+     * Perform a POST to the supplied URL.
+     *
+     * @param string $url
+     * @param string $form Selector for the form to post to.
+     * @param array $data Array of key/value pairs of data to post. Should match
+     *  the `name` attributes of the form elements. Note that if nothing is
+     *  supplied, the default values are posted which may or may not be empty.
+     * @param string $submit Selector for the submit button. Defaults to
+     *  `button[type=submit]`.
+     * @param bool $waitForReload Whether or not to wait for the page to reload
+     *  after submission. Defaults to `true`. `false` may be required if e.g.
+     *  the page does stuff using AJAX.
+     * @return HeadlessChromium\Page
+     */
+    public function post($url, string $form, array $data, string $submit = 'button[type=submit]', bool $waitForReload = true) : Page
     {
         $page = $this->initializeRequest($url);
         $populate = [];
@@ -44,10 +75,18 @@ class Browser
 })();
 EOT
         );
-        $evaluation->waitForPageReload();
+        if ($waitForReload) {
+            $evaluation->waitForPageReload();
+        }
         return $page;
     }
 
+    /**
+     * Private helper to setup a request.
+     *
+     * @param string $url
+     * @return HeadlessChromium\Page
+     */
     private function initializeRequest(string $url) : Page
     {
         $browserFactory = new BrowserFactory($this->command);
