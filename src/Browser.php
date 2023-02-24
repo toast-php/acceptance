@@ -28,6 +28,8 @@ class Browser
         $this->command = $command;
         if (isset($sessionid)) {
             $this->sessionid = $sessionid;
+        } else {
+            $this->sessionid = md5(time());
         }
     }
 
