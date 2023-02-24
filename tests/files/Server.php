@@ -9,6 +9,8 @@
 
             if (isset($_POST['foo'])) {
                 echo "<h1>{$_POST['foo']}</h1>";
+            } else {
+                echo "<h1>Hello world</h1>";
             }
 
         ?>
