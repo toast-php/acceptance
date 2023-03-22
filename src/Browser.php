@@ -95,7 +95,7 @@ EOT
         $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
         $browser = $browserFactory->createBrowser([
             'ignoreCertificateErrors' => true,
-            'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies"],
+            'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies", '--remote-allow-origins=*'],
         ]);
         $page = $browser->createPage();
         $domain = preg_replace('@^https?://(.*?)/.*?$@', '$1', $url);
@@ -105,7 +105,7 @@ EOT
             Cookie::create('TOAST_CLIENT', ''.getenv('TOAST_CLIENT'), compact('domain', 'expires')),
             Cookie::create(self::$sessionname, "{$this->sessionid}", compact('domain', 'expires')),
         ])->await();
-        $page->navigate($url)->waitForNavigation();
+        $page->navigate($url)->waitForNavigation(Page::LOAD, 3000000);
         $page->setUserAgent('Toast/Chrome headless');
         return $page;
     }
