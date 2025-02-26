@@ -23,7 +23,7 @@ class Browser
      *  whenever testing something that relies on a session (e.g. a login).
      * @return void
      */
-    public function __construct(string $command = 'chrome', string $sessionid = null)
+    public function __construct(string $command = 'chrome', ?string $sessionid = null)
     {
         $this->command = $command;
         if (isset($sessionid)) {
@@ -91,12 +91,15 @@ EOT
      */
     private function initializeRequest(string $url) : Page
     {
-        $browserFactory = new BrowserFactory($this->command);
-        $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
-        $browser = $browserFactory->createBrowser([
-            'ignoreCertificateErrors' => true,
-            'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies", '--remote-allow-origins=*'],
-        ]);
+        static $browser;
+        if (!isset($browser)) {
+            $browserFactory = new BrowserFactory($this->command);
+            $cookies = sys_get_temp_dir().'/'.getenv("TOAST_CLIENT");
+            $browser = $browserFactory->createBrowser([
+                'ignoreCertificateErrors' => true,
+                'customFlags' => ['--ssl-protocol=any', '--web-security=false', "--cookies-file=$cookies", '--remote-allow-origins=*'],
+            ]);
+        }
         $page = $browser->createPage();
         $domain = preg_replace('@^https?://(.*?)/.*?$@', '$1', $url);
         $expires = time() + 3600;
